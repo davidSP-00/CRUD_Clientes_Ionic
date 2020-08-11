@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title class="text-center">Login de Acceso</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+
+  <div class="container d-flex h-100">
+
+    <div class="col justify-content-center align-self-center ">
+      <form (submit)="ingresar()" #f="ngForm">
+        <div class="row-sm text-center">
+          <img style="height: 100px;" src="../assets/images/login-img.png" />
+        </div>
+        
+      <div class=" row-sm my-3">
+        <ion-item>
+          <ion-label position="stacked" >Usuario:</ion-label>
+          <ion-input name="username" [(ngModel)]="usuario.username" required></ion-input>
+        </ion-item>
+      </div>
+      <div class="row-sm my-3">
+        <ion-item>
+          <ion-label position="stacked" >Contraseña:</ion-label>
+          <ion-input name="password" [(ngModel)]="usuario.password" required> </ion-input>
+        </ion-item>
+      </div>
+      <div class=" row-sm text-center" >
+        <small class="text-danger" *ngIf="f.submitted && f.invalid">Usuario o contraseña incorrectos</small>
+      </div>
+      <div class="row-sm text-center">
+          <ion-button color="medium" type="submit" >Ingresar</ion-button>
+        
+      </div>
+    </form>
+    </div>
+  </div>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="dark">
+    <ion-title class="text-center">Prueba</ion-title>
+  </ion-toolbar>
+</ion-footer>

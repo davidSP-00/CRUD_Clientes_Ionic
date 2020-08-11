@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button defaultHref="/" ></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-title class="text-center">
+      Avatar Clientes
+    </ion-title>
+    
+ 
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+  <div class="container d-flex h-100">
+
+    <div class="col justify-content-center align-self-center ">
+
+      
+      <div class="row-sm my-3">
+        <ion-card *ngIf="cliente">
+          <img *ngIf="!cliente?.foto" src="http://192.168.1.9:8080/images/no-image.png" alt="Sin foto">
+          <img *ngIf="cliente?.foto" src="http://192.168.1.9:8080/api/uploads/img/{{cliente.foto}}"
+            alt="{{cliente.foto}}">
+          <ion-card-header>
+            <ion-card-subtitle>{{cliente.createAt}}</ion-card-subtitle>
+            <ion-card-title>{{cliente.apellido}}, {{cliente.nombre}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{cliente.email}}
+          </ion-card-content>
+          <ion-card-content>
+            De: {{cliente.region.nombre}}
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div class=" row-sm my-3 text-center" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <ion-button (click)="takeSnap()" color="dark">Cambiar Avatar </ion-button>
+
+      </div>
+    </div>
+  </div>
+
+</ion-content>

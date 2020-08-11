@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-back-button defaultHref="/" ></ion-back-button>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      {{titulo}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container" *ngIf="cliente">
+    <form (ngSubmit)="enviarFormulario()" #form="ngForm" [formGroup]="formulario" >
+      <div class="col">
+        <div class="row-sm">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="nombre">
+            </ion-input>
+          </ion-item>
+          <small class="text-danger" *ngIf="nombreNoValido">Nombre debe tener 4 letras</small>
+
+        </div>
+        <div class="row-sm">
+          <ion-item>
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input formControlName="apellido"></ion-input>
+            
+          </ion-item>
+          <small class="text-danger" *ngIf="apellidoNoValido">Apellido es requerido</small>
+        </div>
+        <div class="row-sm">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email"></ion-input>
+          </ion-item>
+          <small class="text-danger" *ngIf="emailNoValido">Ingrese email valido</small>
+        </div>
+        <div class="row-sm">
+          <ion-item>
+            <ion-label>Fecha</ion-label>
+            <ion-datetime [pickerOptions]="customPickerOptions" 
+              formControlName="fecha"></ion-datetime>
+          </ion-item>
+          <small class="text-danger" *ngIf="fechaNoValido">Fecha es requerido</small>
+        </div>
+        <div class="row-sm mb-4">
+          <ion-item>
+            <ion-label>Region</ion-label>
+            <ion-select 
+            [compareWith]="compararRegion"  
+            name="region" 
+            [value]="cliente.region"
+            
+            formControlName="region"
+            >
+              <ion-select-option [value]="null">seleccione</ion-select-option>
+              <ion-select-option *ngFor="let region of regiones" [value]="region">{{region.nombre}}</ion-select-option>
+
+            </ion-select>
+          </ion-item>
+          <small class="text-danger" *ngIf="regionNoValido">Region es requerido</small>
+        </div>
+        <div class="row-sm text-center">
+          <ion-button *ngIf="cliente.id" color="medium" type="submit">Actualizar</ion-button>
+          <ion-button *ngIf="!cliente.id" color="medium" type="submit">Añadir</ion-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>
